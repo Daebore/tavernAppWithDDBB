@@ -47,6 +47,7 @@
             this.precio_tostada = new System.Windows.Forms.Label();
             this.precio_mead = new System.Windows.Forms.Label();
             this.label_total = new System.Windows.Forms.Label();
+            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             ((System.ComponentModel.ISupportInitialize)(this.rollo_bebidas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cerveza_rubia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cerveza_tostada)).BeginInit();
@@ -338,5 +339,6 @@
         private System.Windows.Forms.Label precio_tostada;
         private System.Windows.Forms.Label precio_mead;
         private System.Windows.Forms.Label label_total;
+        private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
     }
 }

@@ -23,6 +23,8 @@ namespace taverna
 
         private void registro_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'database1DataSet.Usuarios' table. You can move, or remove it, as needed.
+            this.usuariosTableAdapter.Fill(this.database1DataSet.Usuarios);
 
         }
 
@@ -48,6 +50,17 @@ namespace taverna
 
         private void boton_registro_Click(object sender, EventArgs e)
         {
+            Database1DataSetTableAdapters.UsuariosTableAdapter tablaUsuario = new Database1DataSetTableAdapters.UsuariosTableAdapter();
+            tablaUsuario.Insert(meter_usuario.Text, meter_pass.Text);
+
+            meter_usuario.Text = "";
+            meter_pass.Text = "";
+
+            label_exito.Visible = true;
+            label_error.Visible = false;
+            fallo_vacio.Visible = false;
+
+            /*
             //Método que crea el fichero si no existe
             if (!File.Exists(file))
             {
@@ -80,6 +93,8 @@ namespace taverna
                 label_error.Visible = false;
                 label_creado.Visible = false;
             }
+
+            */
         }
 
         private void boton_borrar_Click(object sender, EventArgs e)
@@ -173,6 +188,19 @@ namespace taverna
         private void registro_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.cerrar();
+        }
+
+        private void usuariosBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.usuariosBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.database1DataSet);
+
+        }
+
+        private void label_exito_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

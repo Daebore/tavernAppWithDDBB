@@ -27,6 +27,7 @@ namespace taverna
         private void ventana_Load(object sender, EventArgs e)
         {
 
+
         }
 
         private void antorchaD_Click(object sender, EventArgs e)
@@ -36,6 +37,10 @@ namespace taverna
 
         private void boton_entrar_Click(object sender, EventArgs e)
         {
+           Database1DataSetTableAdapters.UsuariosTableAdapter tablaUsuario = new Database1DataSetTableAdapters.UsuariosTableAdapter();
+           
+
+            /*
             //Este método creará el fichero si no existe
             if (!File.Exists(file))
             {
@@ -76,6 +81,7 @@ namespace taverna
             }
             //Cerramos el fichero
             sr.Close();
+            */
         }
 
         private void boton_salir_Click(object sender, EventArgs e)
@@ -172,6 +178,19 @@ namespace taverna
         private void ventana_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.cerrar();
+        }
+
+        private void usuariosBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.usuariosBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.database1DataSet);
+
+        }
+
+        private void usuariosBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
