@@ -50,15 +50,32 @@ namespace taverna
 
         private void boton_registro_Click(object sender, EventArgs e)
         {
-            Database1DataSetTableAdapters.UsuariosTableAdapter tablaUsuario = new Database1DataSetTableAdapters.UsuariosTableAdapter();
-            tablaUsuario.Insert(meter_usuario.Text, meter_pass.Text);
+            Boolean existe = false;
+            Database1DataSetTableAdapters.UsuariosTableAdapter adapter = new Database1DataSetTableAdapters.UsuariosTableAdapter();
+            Database1DataSet.UsuariosDataTable tablaUsuarios = adapter.GetData();
 
-            meter_usuario.Text = "";
-            meter_pass.Text = "";
+            for (int i = 0; i < tablaUsuarios.Count; i++)
+            {
+                if (tablaUsuarios[i][0].ToString().Trim() == meter_usuario.Text)
+                {
+                    existe = true;
+                    
+                }
+            }
 
-            label_exito.Visible = true;
-            label_error.Visible = false;
-            fallo_vacio.Visible = false;
+            if (existe == false)
+            {
+                Database1DataSetTableAdapters.UsuariosTableAdapter tablaUsuario = new Database1DataSetTableAdapters.UsuariosTableAdapter();
+                tablaUsuario.Insert(meter_usuario.Text, meter_pass.Text);
+
+                meter_usuario.Text = "";
+                meter_pass.Text = "";
+
+                label_exito.Visible = true;
+                label_error.Visible = false;
+                fallo_vacio.Visible = false;
+            }
+
 
             /*
             //Método que crea el fichero si no existe
