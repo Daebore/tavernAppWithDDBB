@@ -37,8 +37,24 @@ namespace taverna
 
         private void boton_entrar_Click(object sender, EventArgs e)
         {
-           Database1DataSetTableAdapters.UsuariosTableAdapter tablaUsuario = new Database1DataSetTableAdapters.UsuariosTableAdapter();
-           
+           Database1DataSetTableAdapters.UsuariosTableAdapter adapter = new Database1DataSetTableAdapters.UsuariosTableAdapter();
+            Database1DataSet.UsuariosDataTable tablaUsuarios = adapter.GetData();
+
+            for (int i = 0; i < tablaUsuarios.Count; i++)
+            {
+                if (tablaUsuarios[i][0].ToString().Trim() == meter_usuario.Text)
+                {
+                    if (tablaUsuarios[i][1].ToString().Trim() == meter_pass.Text)
+                    {
+                        new salonTaberna().Show();
+                        this.Close();
+                    }
+                }
+                label_error.Visible = true;
+            }
+             
+
+
 
             /*
             //Este método creará el fichero si no existe
