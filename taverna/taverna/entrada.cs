@@ -53,51 +53,6 @@ namespace taverna
                 label_error.Visible = true;
             }
              
-
-
-
-            /*
-            //Este método creará el fichero si no existe
-            if (!File.Exists(file))
-            {
-                File.Create(file);
-            }
-
-            String line;
-            //Creamos un objeto que nos permita leer
-            StreamReader sr = new StreamReader(file);
-            //Decalramos una lista
-            ArrayList lista = new ArrayList();
-            //Leemos la primera línea y guardamos el resultado en el String line
-            line = sr.ReadLine();
-            //Metemos el String en la lista
-            lista.Add(lista);
-
-            //Mientras el fichero tenga información, se seguirá leyendo
-            while (line != null)
-            {
-                //Cada registro va a tener el nombre del usuario y la edad, separados por un ;
-                //Con split separamos cada registro y lo guardamos en un array auxiliar
-                string[] array = line.Split(';');
-                if (meter_usuario.Text.Equals(array[0]))
-                {
-                    //Esto nos va a permitir mostrar el nombre del usuario en la siguiente página
-                    salonTaberna.nombreUser = meter_usuario.Text;
-                    if (meter_pass.Text.Equals(array[1]))
-                    {
-                        //Si el usuario y la contraseña introducidos por el usuario, cambiamos de pantalla y escondemos la actual
-                        new salonTaberna().Show();
-                        this.Close();
-                    }
-                }
-                //Si el usuario y/o contraseña no coinciden con las registradas, mostramos un label indicando un error
-                label_error.Visible = true;
-                //Seguimos leyendo
-                line = sr.ReadLine();
-            }
-            //Cerramos el fichero
-            sr.Close();
-            */
         }
 
         private void boton_salir_Click(object sender, EventArgs e)
@@ -154,26 +109,12 @@ namespace taverna
         
         private void contarUsers()
         {
-            //Este método nos permitírá mostrar por pantalla el número de usuarios que hay registrados
-            //Funciona de forma similar al anterior que nos permitía leer, sin embargo, en este caso es 
-            //más sencillo: por cada línea que leamos en el fichero, sumamos 1 a la variable contador
-            //y mostramos el resultado en la pantalla inicial
-            int contador = 0;
-            String line;
-            StreamReader sr = new StreamReader(file);
-            ArrayList lista = new ArrayList();
-            line = sr.ReadLine();
-            lista.Add(lista);
+            // Contamos el número de registros de la BBDD con Count() y lo guardamos en una variable
+            Database1DataSetTableAdapters.UsuariosTableAdapter adapter = new Database1DataSetTableAdapters.UsuariosTableAdapter();
+            Database1DataSet.UsuariosDataTable tablaUsuarios = adapter.GetData();
 
-            while (line != null)
-            {
-                line = sr.ReadLine();
-                contador++;
+            label_registados.Text += tablaUsuarios.Count;
 
-            }
-            sr.Close();
-            //Mostramos el resultado por pantalla (requiere casteo al ser un .Text)
-            label_registados.Text += contador.ToString();
         }
 
         private void label_registados_Click(object sender, EventArgs e)
