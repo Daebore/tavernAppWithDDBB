@@ -50,24 +50,40 @@ namespace taverna
 
         private void boton_registro_Click(object sender, EventArgs e)
         {
+
+            // Declaramos un boolean que va a permitirnos comprobar si ya existe en la BBDD un usuario registrado
+            // con ese nombre
             Boolean existe = false;
+
+            // Con esta sentencia, nos conectamos a la tabla Usuarios de la BBDD
             Database1DataSetTableAdapters.UsuariosTableAdapter adapter = new Database1DataSetTableAdapters.UsuariosTableAdapter();
+
+            // Con lo anterior, creamos un array bidimensional (tupla-campo) con la información de la tabla
             Database1DataSet.UsuariosDataTable tablaUsuarios = adapter.GetData();
 
+            // Recorremos el array
             for (int i = 0; i < tablaUsuarios.Count; i++)
             {
+                // Si el primer elemento (el nombre) coincide con lo que hay en el campo meter_usuario
+                // significa qyue ya existe un usuario registrado con ese nombre
                 if (tablaUsuarios[i][0].ToString().Trim() == meter_usuario.Text)
                 {
                     existe = true;
-                    
+                    label_error.Visible = true;
+
                 }
             }
 
+            // Si el valor de existe es falseo, significa que no existe ningún usuario con el mismo nombre en la BBDD
             if (existe == false)
             {
+                // Volvemos a hacer lo mismo
                 Database1DataSetTableAdapters.UsuariosTableAdapter tablaUsuario = new Database1DataSetTableAdapters.UsuariosTableAdapter();
+
+                // Hacemos el insert en la BBDD
                 tablaUsuario.Insert(meter_usuario.Text, meter_pass.Text);
 
+                // Vaciamos los campos de nobmre y contraseña
                 meter_usuario.Text = "";
                 meter_pass.Text = "";
 

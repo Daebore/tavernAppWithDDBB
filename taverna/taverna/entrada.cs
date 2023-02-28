@@ -15,8 +15,7 @@ namespace taverna
 {
     public partial class ventana : Form
     {
-        //Declaramos un String y guardamos en él el fichero de texto
-        string file = ("bbdd.txt");
+
         public ventana()
         {
             InitializeComponent();
@@ -44,8 +43,10 @@ namespace taverna
             {
                 if (tablaUsuarios[i][0].ToString().Trim() == meter_usuario.Text)
                 {
+
                     if (tablaUsuarios[i][1].ToString().Trim() == meter_pass.Text)
                     {
+                        salonTaberna.nombreUser = meter_usuario.Text;
                         new salonTaberna().Show();
                         this.Close();
                     }
