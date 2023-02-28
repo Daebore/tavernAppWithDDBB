@@ -14,8 +14,6 @@ namespace taverna
 {
     public partial class registro : Form
     {
-        //Cremos un String con la dirección del fichero
-        string file = ("bbdd.txt");
         public registro()
         {
             InitializeComponent();
