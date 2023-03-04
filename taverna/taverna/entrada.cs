@@ -36,21 +36,31 @@ namespace taverna
 
         private void boton_entrar_Click(object sender, EventArgs e)
         {
+            // Creamos un array bidimensional con el quie vamos a poder acceder a todos los elementos de la tabla Usuarios
+            // La primera posición del array bidimensional coincide con la tupla y la segunda con los elementos de la taba
+            // (posición 0 será el nombre y la posición 1 la contraseña)
            Database1DataSetTableAdapters.UsuariosTableAdapter adapter = new Database1DataSetTableAdapters.UsuariosTableAdapter();
             Database1DataSet.UsuariosDataTable tablaUsuarios = adapter.GetData();
 
             for (int i = 0; i < tablaUsuarios.Count; i++)
             {
+                // Comprobamos que el nombre introducido en meter_usuario.Text coincide con algún nombre de la BBDD
                 if (tablaUsuarios[i][0].ToString().Trim() == meter_usuario.Text)
                 {
-
+                    // Comprobamos que la contraseña introducida en meter_pass.Text coincide con alguna contraseña de la BBDD
                     if (tablaUsuarios[i][1].ToString().Trim() == meter_pass.Text)
                     {
+                        // Si ambos coinciden, guardamos el nombre del usuario en la variable estática nombreUser
+                        // que pertenece al form salonTaberna (para poder mostrar el nombre del usuario registrado
+                        // en la siguiente ventana), nos vamos a salonTaberna y cerramos el form actual
                         salonTaberna.nombreUser = meter_usuario.Text;
                         new salonTaberna().Show();
                         this.Close();
                     }
                 }
+
+                // Si no coincide el nombre, mostramos un mensaje de error (es redundante comporbar la contraseña
+                // si el nombre no coincide)
                 label_error.Visible = true;
             }
              

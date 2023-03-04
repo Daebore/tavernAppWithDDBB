@@ -181,9 +181,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bbdd.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="bebidas.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
